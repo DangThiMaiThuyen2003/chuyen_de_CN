@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from myapp.models import Entry
 
-# Create your views here.
+def entry_list(request):
+    entries = Entry.objects.all()
+    return render(request, 'myapp/entry_list.html', {'entries': entries})

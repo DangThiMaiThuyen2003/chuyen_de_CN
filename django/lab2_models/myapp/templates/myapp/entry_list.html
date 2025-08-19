@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Danh sách bài viết</title>
+</head>
+<body>
+    <h1>Danh sách bài viết</h1>
+    {% if entries %}
+        <ul>
+        {% for entry in entries %}
+            <li>
+                <h3>{{ entry.headline }}</h3>
+                <p><strong>Blog:</strong> {{ entry.blog.name }}</p>
+                <p><strong>Tác giả:</strong> 
+                    {% for author in entry.authors.all %}
+                        {{ author.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p><strong>Nội dung:</strong> {{ entry.body_text }}</p>
+                <p><strong>Ngày xuất bản:</strong> {{ entry.pub_date }}</p>
+                <p><strong>Số bình luận:</strong> {{ entry.number_of_comments }}</p>
+                <p><strong>Xếp hạng:</strong> {{ entry.rating }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Không có bài viết nào.</p>
+    {% endif %}
+</body>
+</html>
