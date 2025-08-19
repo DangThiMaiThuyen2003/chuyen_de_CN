@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chi tiết bài viết</title>
+</head>
+<body>
+    <h1>{{ entry.headline }}</h1>
+    <p><strong>Blog:</strong> {{ entry.blog.name }}</p>
+    <p><strong>Tác giả:</strong> 
+        {% for author in entry.authors.all %}
+            <a href="{% url 'myapp:author_detail' author.pk %}">{{ author.name }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <p><strong>Nội dung:</strong> {{ entry.body_text }}</p>
+    <p><strong>Ngày xuất bản:</strong> {{ entry.pub_date }}</p>
+    <p><strong>Số bình luận:</strong> {{ entry.number_of_comments }}</p>
+    <p><strong>Xếp hạng:</strong> {{ entry.rating }}</p>
+    <a href="{% url 'myapp:entry_list' %}">Quay lại danh sách</a>
+</body>
+</html>
