@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chi tiết tác giả</title>
+</head>
+<body>
+    <h1>{{ author.name }}</h1>
+    <p><strong>Email:</strong> {{ author.email }}</p>
+    <h2>Bài viết của tác giả</h2>
+    <ul>
+        {% for entry in entries %}
+            <li><a href="{% url 'myapp:entry_detail' entry.pk %}">{{ entry.headline }}</a></li>
+        {% empty %}
+            <li>Không có bài viết nào.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'myapp:entry_list' %}">Quay lại danh sách</a>
+</body>
+</html>

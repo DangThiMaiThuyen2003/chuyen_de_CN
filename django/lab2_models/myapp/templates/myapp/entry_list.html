@@ -5,21 +5,23 @@
 </head>
 <body>
     <h1>Danh sách bài viết</h1>
+    <h2>Thêm bài viết mới</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Thêm</button>
+    </form>
+    <hr>
     {% if entries %}
         <ul>
         {% for entry in entries %}
             <li>
-                <h3>{{ entry.headline }}</h3>
-                <p><strong>Blog:</strong> {{ entry.blog.name }}</p>
-                <p><strong>Tác giả:</strong> 
-                    {% for author in entry.authors.all %}
-                        {{ author.name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </p>
-                <p><strong>Nội dung:</strong> {{ entry.body_text }}</p>
+                <h3><a href="{% url 'myapp:entry_detail' entry.pk %}">{{ entry.headline }}</a></h3>
                 <p><strong>Ngày xuất bản:</strong> {{ entry.pub_date }}</p>
-                <p><strong>Số bình luận:</strong> {{ entry.number_of_comments }}</p>
-                <p><strong>Xếp hạng:</strong> {{ entry.rating }}</p>
+                <form method="post" action="{% url 'myapp:entry_delete' entry.pk %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</button>
+                </form>
             </li>
         {% endfor %}
         </ul>
