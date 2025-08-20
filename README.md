@@ -37,6 +37,33 @@ pip install -r requirements.txt
 
 Chỉnh sửa settings.py để kết nối database (PostgreSQL hoặc SQLite).
 
+**1. Sử dụng SQLite (mặc định)**
+**settings.py**
+
+```bash
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
+}
+```
+
+**2. Sử dụng PostgreSQL**
+**settings.py**
+```bash 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ten_database',       # Tên database tạo trên PostgreSQL
+        'USER': 'ten_user',           # User PostgreSQL
+        'PASSWORD': 'mat_khau',       # Mật khẩu
+        'HOST': 'localhost',          # Hoặc địa chỉ server PostgreSQL
+        'PORT': '5432',               # Cổng mặc định PostgreSQL
+    }
+}
+```
+
 **6. Chạy migrations**
 ```bash
 python manage.py makemigrations
