@@ -16,5 +16,11 @@
             <li>Chưa có bài viết nào.</li>
         {% endfor %}
     </ul>
+
+    <h2>Archive</h2>
+    <ul>
+        <li><a href="{% url 'blog:year_archive' 2023 %}">2023 Archive</a></li>
+        <li><a href="{% url 'blog:year_archive' 2024 %}">2024 Archive</a></li>
+    </ul>
 </body>
 </html>
