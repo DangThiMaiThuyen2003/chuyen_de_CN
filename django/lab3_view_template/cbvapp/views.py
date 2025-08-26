@@ -6,6 +6,9 @@ from django.views.generic import TemplateView
 from .models import Book
 from django.views.generic import ListView
 
+from django.shortcuts import render
+import datetime
+
 # Class-based view cơ bản với TemplateView
 class AboutView(TemplateView):
     template_name = "cbvapp/about.html"
@@ -32,4 +35,18 @@ class BookListView(ListView):
             }
         )
         return response
+    
+
+
+def hello_template(request):
+    now = datetime.datetime.now()
+    context = {
+        "name": "Django Student",
+        "date": now.strftime("%Y-%m-%d"),
+        "time": now.strftime("%H:%M:%S"),
+        "message": "Welcome to Django!",
+        "skills": ["Python", "Django"],
+    }
+    return render(request, "hello.html", context)
+
 
