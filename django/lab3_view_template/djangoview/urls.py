@@ -23,5 +23,6 @@ urlpatterns = [
     path("articles/", include("articles.urls")),
     path('blog/', include('blog.urls')),
     path("myapp/", include("myapp.urls")),
+    path("cbv/", include("cbvapp.urls")),
 ]
 
