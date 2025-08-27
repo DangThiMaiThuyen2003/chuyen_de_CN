@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Template</title>
+</head>
+<body>
+    <h1>Hello, {{ name }}!</h1>
+    <p>Today is {{ date }} and it is {{ time }}</p>
+    <p>{{ message }}</p>
+
+    <h3>The skills you are learning:</h3>
+    <ul>
+    {% for skill in skills %}
+        <li>{{ skill }}</li>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>

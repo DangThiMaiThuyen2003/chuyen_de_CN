@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Danh sách bài viết</title>
+</head>
+<body>
+    <h1>Danh sách bài viết</h1>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <strong>{{ post.title }}</strong> <br>
+                {{ post.content }} <br>
+                <em>{{ post.created_at }}</em>
+            </li>
+        {% empty %}
+            <li>Chưa có bài viết nào.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Archive</h2>
+    <ul>
+        <li><a href="{% url 'blog:year_archive' 2023 %}">2023 Archive</a></li>
+        <li><a href="{% url 'blog:year_archive' 2024 %}">2024 Archive</a></li>
+    </ul>
+</body>
+</html>

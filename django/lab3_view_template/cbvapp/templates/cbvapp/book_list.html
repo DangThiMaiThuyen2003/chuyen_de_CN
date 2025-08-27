@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Book Library</h1>
+    <ul>
+        {% for book in object_list %}
+            <li>
+                <strong>{{ book.title }}</strong> by {{ book.author }}
+                (Published: {{ book.publication_date }})
+            </li>
+        {% empty %}
+            <li>No books available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

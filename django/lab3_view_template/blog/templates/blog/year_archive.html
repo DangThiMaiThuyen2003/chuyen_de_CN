@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Archive {{ year }}</title>
+</head>
+<body>
+    <h1>Posts in {{ year }}</h1>
+    <ul>
+        {% for post in posts %}
+            <li>{{ post.title }} ({{ post.created_at }})</li>
+        {% empty %}
+            <li>No posts found in {{ year }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'blog:post_list' %}">Back to all posts</a></p>
+</body>
+</html>
