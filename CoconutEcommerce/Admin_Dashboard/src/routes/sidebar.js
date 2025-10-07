@@ -1,0 +1,99 @@
+/**
+ * ⚠ These are used just to render the Sidebar!
+ * You can include any link here, local or external.
+ *
+ * If you're looking to actual Router routes, go to
+ * `routes/index.js`
+ */
+export const menuByRole = {
+  admin: [
+    "Dashboard", "Orders", "Products", "All Products", "Add Product", "Inventory Check", "Customers", "Chats", "Delivery", "Profile", "Staff Management", "Settings", "Logout", "Discounts"
+  ],
+  staff_inventory: ["Dashboard", "Products", "All Products", "Add Product", "Inventory Check", "Profile", "Settings", "Logout"],
+  staff_support: ["Dashboard", "Orders", "Customers", "Chats", "Profile", "Settings", "Logout"],
+  staff_delivery: ["Dashboard", "Delivery", "Profile", "Settings", "Logout"],
+  staff_sale: ["Dashboard", "Orders", "Customers", "Chats", "Profile", "Settings", "Logout", "Discounts"],
+};
+
+// Lọc routes theo role đã lưu trong storage bằng cách dùng menuByRole và baseRoutes  
+// baseRoutes là các routes mặc định
+// menuByRole là các routes mà mỗi role có thể truy cập
+// getAllowedRoutes là hàm để lọc routes theo role đã lưu trong storage
+// localStorage là lưu trữ dữ liệu trong trình duyệt cho đến khi người dùng xóa
+// sessionStorage là lưu trữ dữ liệu trong trình duyệt cho đến khi người dùng đóng trình duyệt
+
+const baseRoutes = [
+  {
+    path: "/dashboard", // the url
+    icon: "HomeIcon", // the component being exported from icons/index.js
+    name: "Dashboard", // name that appear in Sidebar
+  },
+  {
+    path: "/orders",
+    icon: "CartIcon",
+    name: "Orders",
+  },
+  {
+    path: "/products",
+    icon: "TruckIcon",
+    name: "Products",
+    routes: [
+      {
+        path: "/all-products",
+        name: "All Products",
+      },
+      {
+        path: "/add-product",
+        name: "Add Product",
+      },
+      {
+        path: "/app/inventory-check",
+        name: "Inventory Check",
+      },
+    ],
+  },
+  {
+    path: "/customers",
+    icon: "GroupIcon",
+    name: "Customers",
+  },
+  {
+    path: "/delivery",
+    icon: "TruckIcon",
+    name: "Delivery",
+  },
+  {
+    path: "/discounts",
+    icon: "MoneyIcon",
+    name: "Discounts"
+  },
+  {
+    path: "/chats",
+    icon: "ChatIcon",
+    name: "Chats",
+  },
+  {
+    path: "/manage-profile",
+    icon: "UserIcon",
+    name: "Profile",
+  },
+  {
+    path: "/staff-management",
+    icon: "GroupIcon",
+    name: "Staff Management",
+  },
+  {
+    path: "/settings",
+    icon: "OutlineCogIcon",
+    name: "Settings",
+  },
+  {
+    path: "/logout",
+    icon: "OutlineLogoutIcon",
+    name: "Logout",
+  },
+];
+
+const routes = baseRoutes;
+
+export default routes;
