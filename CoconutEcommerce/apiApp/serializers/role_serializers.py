@@ -30,5 +30,11 @@ class RoleSerializer(serializers.ModelSerializer):
 
         return value
 
-    
+    # Thêm validation cho permission_ids
+    def validate_permission_ids(self, value):
+        # Kiểm tra số lượng permission tối thiểu
+        if len(value) < 1:
+            raise serializers.ValidationError("Role phải có ít nhất 1 permission")
+            
+        return value
     
