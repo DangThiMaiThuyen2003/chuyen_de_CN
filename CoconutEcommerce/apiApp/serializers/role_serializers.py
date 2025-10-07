@@ -10,6 +10,18 @@ class RoleSerializer(serializers.ModelSerializer):
     permissions = PermissionSerializer(many=True, read_only=True)
     permission_ids = serializers.PrimaryKeyRelatedField(many=True, queryset=Permission.objects.all(), write_only=True, source='permissions')
 
+    # Thêm validation cho trường name
+    def validate_name(self, value):
+        # Kiểm tra độ dài tên role
+        if len(value) < 3:
+            raise serializers.ValidationError("Tên role phải có ít nhất 3 ký tự")
+        
+        # Kiểm tra tên role đã tồn tại chưa
+        if Role.objects.filter(name=value).exists():
+            raise serializers.ValidationError("Tên role này đã tồn tại")
+            
+        return value
+    
     class Meta:
         model = Role
         fields = ['id', 'name', 'description', 'permissions', 'permission_ids']
