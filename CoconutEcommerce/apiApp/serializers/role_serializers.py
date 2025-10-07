@@ -13,3 +13,28 @@ class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
         fields = ['id', 'name', 'description', 'permissions', 'permission_ids']
+        extra_kwargs = {
+            'description': {'required': True}
+        }
+        
+    def validate_name(self, value):
+        # Kiểm tra độ dài tên role
+        if len(value) < 3:
+            raise serializers.ValidationError("Tên role phải có ít nhất 3 ký tự")
+
+        # Khi update, không kiểm tra trùng với chính nó
+        if self.instance and self.instance.name == value:
+            return value
+        if Role.objects.filter(name=value).exists():
+            raise serializers.ValidationError("Tên role này đã tồn tại")
+
+        return value
+
+    # Thêm validation cho permission_ids
+    def validate_permission_ids(self, value):
+        # Kiểm tra số lượng permission tối thiểu
+        if len(value) < 1:
+            raise serializers.ValidationError("Role phải có ít nhất 1 permission")
+            
+        return value
+    
