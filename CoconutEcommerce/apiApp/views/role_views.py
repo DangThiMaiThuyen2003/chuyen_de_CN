@@ -4,10 +4,18 @@ from apiApp.serializers.role_serializers import RoleSerializer, PermissionSerial
 from apiApp.utils.cache_utils import cache_response
 from django.core.cache import cache
 from django.conf import settings
+from django_filters import rest_framework as filters
+from apiApp.filters import RoleFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 class RoleViewSet(viewsets.ModelViewSet):
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
+    filter_backends = [filters.DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_class = RoleFilter
+    search_fields = ['name', 'description']
+    ordering_fields = ['id', 'name']
+    ordering = ['id']
     
     @cache_response(timeout=settings.CACHE_TTL)
     def list(self, request, *args, **kwargs):
