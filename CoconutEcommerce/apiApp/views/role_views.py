@@ -7,6 +7,7 @@ from django.conf import settings
 from django_filters import rest_framework as filters
 from apiApp.filters import RoleFilter
 from rest_framework.filters import SearchFilter, OrderingFilter
+from apiApp.pagination import StandardResultsSetPagination
 
 class RoleViewSet(viewsets.ModelViewSet):
     queryset = Role.objects.all()
@@ -16,6 +17,7 @@ class RoleViewSet(viewsets.ModelViewSet):
     search_fields = ['name', 'description']
     ordering_fields = ['id', 'name']
     ordering = ['id']
+    pagination_class = StandardResultsSetPagination  # Sử dụng PageNumberPagination
     
     @cache_response(timeout=settings.CACHE_TTL)
     def list(self, request, *args, **kwargs):
